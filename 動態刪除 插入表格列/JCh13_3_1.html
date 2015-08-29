@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ch13_3_1.htm</title>
+<script>
+function changeContent() {
+	var table = document.getElementById("myTable");
+	var objRow = table.rows;
+	var objCell = objRow[0].cells;
+	objCell[0].innerHTML = "DHTML";
+	objCell[1].innerHTML = "ASP.NET";
+}
+
+function changeAlign() {
+	var table = document.getElementById("myTable");
+	table.rows[0].align = "right";
+}    	
+
+function changeValign() {
+	var table = document.getElementById("myTable");
+	table.rows[1].vAlign = "top";
+}
+</script>	
+</head>
+<body>
+<h2>HTMLTableRowElement 物件的屬性</h2>
+<hr/>
+<table id="myTable" border="1">
+	<tr>
+		<td width="100">HTML</td>
+		<td>CSS</td>
+	</tr>
+	<tr>
+		<td height="50">JavaScript</td>
+		<td height="50">VBScript</td>
+	</tr>		
+</table>
+<form>
+	<input type="button" onclick="changeContent()" value="更改儲存格內容">
+	<input type="button" onclick="changeAlign()" value="向右對齊">
+	<input type="button" onclick="changeValign()" value="向上對齊">      
+</form>	
+</body>	
+</html>
+

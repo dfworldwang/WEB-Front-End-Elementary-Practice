@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ch13_2_2.htm</title>
+<script>
+
+var intRowIndex = 0;
+function insertRow(tbIndex) {
+	var table = document.getElementById("myTable");
+	if (tbIndex < 0) {
+		var tbIndex = table.rows.length;								
+	}
+	var objRow = table.insertRow(tbIndex);
+	var objCel = objRow.insertCell(0);
+	objCel.innerHTML = "DHTML";
+	var objCel = objRow.insertCell(1);
+	objCel.innerHTML = "ASP.NET";
+	objRow.addEventListener("click", getIndex, false);
+	objRow.style.background = "pink";   						
+}	
+
+function deleteRow(tbIndex) {
+	var table = document.getElementById("myTable");
+	table.deleteRow(tbIndex);					
+}
+
+function getIndex() { // 事件處理
+	intRowIndex = this.rowIndex;
+	updateIndex(intRowIndex); 					
+}  
+
+function updateIndex(index) { // 更新索引值
+	var pos = document.getElementById("pos");
+	pos.innerHTML = index;								
+}
+
+function initial() { // 註冊事件
+	var tr1 = document.getElementById("tr1");
+	tr1.addEventListener("click", getIndex, false);
+	var tr2 = document.getElementById("tr2");
+	tr2.addEventListener("click", getIndex, false);
+	updateIndex(0);							
+}
+</script>	
+</head>
+<body onload="initial();">
+<h2>HTMLTableElement 物件的方法</h2>
+<hr/>
+表格列索引: <span id="pos"></span>
+<table id="myTable" border="1">
+	<tr id="tr1">
+		<td>HTML</td>
+		<td>CSS</td>											
+	</tr>
+	<tr id="tr2">
+		<td>JavaScript</td>
+		<td>VBScript</td>												
+	</tr>
+</table>
+<form>
+	<input type="button" onclick="insertRow(intRowIndex)" value="插入列">
+	<input type="button" onclick="deleteRow(intRowIndex)" value="刪除列">
+	<input type="button" onclick="insertRow(-1);" value="新增最後1列">	  			
+</form>	
+</body>	
+</html>

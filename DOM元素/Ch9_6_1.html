@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ch9_6_1.htm</title>
+<meta charset="UTF-8">
+<script src="jquery-1.11.1.js"></script>
+<script>
+$(document).ready(function() {
+	$('.content1').html('<div class="main">jQuery 網頁設計</div>');
+	$('.content2').text('HTML 網頁設計');
+	$('.content2').append('<p>PHP 網頁設計</p>');
+	$('.content2').after('<p>JSP 網頁設計</p>');
+	$('.content3').remove();	
+});								
+</script>	
+</head>
+<body>
+<div class="content1">
+	<P>JavaScript 網頁設計</P>			
+</div>
+<div class="content2"></div>
+<div class="content3">ASP.NET 網頁設計</div>	
+</body>	
+</html>

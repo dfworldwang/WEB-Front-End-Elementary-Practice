@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ch13_2_1.htm</title>
+<script>
+function changeFrame() {
+	var table = document.getElementById("myTable");
+	table.frame = "above";			
+}	
+
+function changePadding() {
+	var table = document.getElementById("myTable");
+	table.cellPadding = "20";					
+}
+
+function changeWidth() {
+	var table = document.getElementById("myTable");
+	table.width = "250";
+}
+</script>	
+</head>
+<body>
+<h2>HTMLTableElement 物件的屬性</h2>
+<hr/>
+<table id="myTable" border="1">
+	<tr>
+		<td>HTML</td>
+		<td>CSS</td>			
+	</tr>
+	<tr>
+		<td>JavaScript</td>
+		<td>VBScript</td>			
+	</tr>
+</table>
+<form>
+	<input type="button" onclick="changeFrame()" value="只有上方框線">
+	<input type="button" onclick="changePadding()" value="更改儲存格留白">
+	<input type="button" onclick="changeWidth()" value="更改表格寬度">   		
+</form>	
+</body>	
+</html>

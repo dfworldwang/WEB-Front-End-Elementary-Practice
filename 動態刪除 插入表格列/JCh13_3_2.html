@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ch13_3_2.htm</title>
+<script>
+var intRowIndex = 0;
+var intCellIndex = 0;
+
+function insertCell(rowIndex, cellIndex) {
+	var table = document.getElementById("myTable");
+	if (cellIndex < 0) {
+		cellIndex = table.rows[rowIndex].cells.length;
+	} // 新增
+	
+	var objCel = table.rows[rowIndex].insertCell(cellIndex);
+	objCel.innerHTML = rowIndex + " : " + cellIndex;
+	objCel.style.background = "pink";
+	
+}	
+
+function deleteCell(rowIndex, cellIndex) {
+	var table = document.getElementById("myTable");
+	table.rows[rowIndex].deleteCell(cellIndex);
+}
+
+function getIndex(event) {
+	intRowIndex = this.rowIndex;
+	intCellIndex = event.target.cellIndex;
+	updateIndex(intRowIndex, intCellIndex); 
+}     
+
+function updateIndex(rowIndex, cellIndex) { // 更新索引值
+	var pos = document.getElementById("pos");
+	pos.innerHTML = rowIndex + ":" + cellIndex;				
+}
+
+function initial() { // 註冊事件
+	var tr1 = document.getElementById("tr1");
+	tr1.addEventListener("click", getIndex, false);
+	var tr2 = document.getElementById("tr2");
+	tr2.addEventListener("click", getIndex, false);
+	updateIndex(0, 0);
+}
+</script>     	
+</head>
+<body onload="initial()">
+<h2>HTMLTableRowElement 物件的方法</h2>
+<hr/>
+儲存格索引  : <span id="pos"></span>
+<table id="myTable" border="1">
+<tr id="tr1">
+	<td>HTML</td>
+	<td>CSS</td>
+</tr>
+<tr id="tr2">
+	<td>JavaScript</td>
+	<td>VBScript</td>
+</tr>    	
+</table>
+<form>
+	<input type="button" value="插入儲存格" onclick="insertCell(intRowIndex, intCellIndex)">
+	<input type="button" value="刪除儲存格" onclick="deleteCell(intRowIndex, intCellIndex)">
+	<input type="button" value="新增儲存格" onclick="insertCell(intRowIndex, -1)">               
+</form>	
+</body>	
+</html>     
+
