@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="BIG5">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="extjs-4.1.1/resources/css/ext-all.css">
+<script type="text/javascript" src="extjs-4.1.1/ext-all.js"></script>
+<script type="text/javascript" src="extjs-4.1.1/examples/shared/examples.js"></script>
+<script type="text/javascript">
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Ext.ux', 'extjs-4.1.1/examples/ux');
+Ext.require([
+	'Ext.form.Panel',
+	'Ext.ux.form.MultiSelect',
+	'Ext.ux.form.ItemSelector',
+	'Ext.tip.QuickTipManager',
+	'Ext.ux.ajax.JsonSimlet',
+	'Ext.ux.ajax.SimManager'
+]);
+
+Ext.onReady(function() {
+	Ext.tip.QuickTipManager.init();						
+	function createDockedItems(fieldId) {
+		return [{
+			xtype: 'toolbar',
+			dock: 'top',					// 增加一行在上頭
+			items: {
+				text: 'Options',			// 選單  toolbar 的名稱
+				menu: [{					// 選單  toolbar 的選項
+					text: 'Get value',		// 選項的名稱
+					handler: function() {			// 選項對應的處理函式
+						var value = Ext.getCmp(fieldId).getValue();		// getCmp(): 尋找id, getValue(): 取值.
+						Ext.Msg.alert('Value is a split array', value.join(', '));		// join(): 在值的後面加上 ', '
+					}
+				}]
+			}
+		}];		
+	}
+	
+	Ext.ux.ajax.SimManager.init({
+		delay: 300,
+		defaultSimlet: null
+	}).register({
+		'Numbers': {
+			data: [[123, 'One Hundred Twenty Three'],
+					['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five'],
+					['6', 'Six']],
+			stype: 'json'		
+		} 
+	});
+	
+	var msform = Ext.widget('form', {
+		title: 'MultiSelect Test',				// form 的標題
+		width: 400,								// form 的寬度
+		bodyPadding: 10, 						// form 的邊框與內容的距離
+		renderTo: 'multiselect1',			// 把  form 加到id名稱為multiselect的div區域中
+		items:[{
+			anchor: '100%',					// form 的內容框向右的放大數
+			xtype: 'multiselect',
+			msgTarget: 'side',
+			fieldLabel: 'Multiselect',		// form 的標籤的名稱
+			name: 'multiselect',
+			id: 'multiselect-field',		// 此  form 傳送給createDockedItems的fieldId名稱
+			allowBlank: false, 
+			store: {						// 資料儲存物件
+				fields: [ 'number', 'numberName' ],		// 資料儲存物件的標籤格式		
+				proxy: {
+					type: 'ajax',
+					url: 'Numbers',				// 資料的來源 (為上面SimManager中的Numbers)
+					reader: 'array'				// 資料的形式為陣列
+				},
+				autoLoad: true					// 若為 false, 則不列出內容	
+			},
+			valueField: 'number',				// 標籤值的名稱
+			displayField: 'numberName',			// 標籤值的展示值
+			value: ['3', '4', '6'],				// 標籤的預設選取值
+			ddReorder: true
+		}],		
+		dockedItems: createDockedItems('multiselect-field')		// dockedItems 可在上頭或底部增加一行
+	});
+});		
+</script>
+</head>
+<body>
+	<div id="multiselect1" class="demo-ct"></div>
+</body>
+</html>
