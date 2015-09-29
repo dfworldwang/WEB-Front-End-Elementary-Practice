@@ -34,6 +34,22 @@ Ext.onReady(function() {
 					}
 				}]
 			}
+		}, {
+			xtype: 'toolbar',
+			dock: 'bottom',					// 增加一行在底部
+			ui: 'footer',
+			defaults: {
+				minWidth: 75				// 選單  toolbar 的寬度
+			},
+			items: ['->', {
+				text: 'Clear',				// 選項的名稱
+				handler: function() {
+					var field = Ext.getCmp(fieldId);		// 尋找id
+					if (!field.disabled) {
+						field.clearValue();					// clearValue(): 清除id的值
+					}
+				}
+			}]
 		}];		
 	}
 	
